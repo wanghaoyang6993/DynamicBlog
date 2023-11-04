@@ -1,0 +1,244 @@
+/*
+
+html5doctor.com Reset Stylesheet
+
+Time:2020.8.4
+
+Author: Zhenglin Li
+
+*/
+
+html, body, div, span, object, iframe,
+
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+
+abbr, address, cite, code,
+
+del, dfn, em, img, ins, kbd, q, samp,
+
+small, strong, sub, sup, var,
+
+b, i,
+
+dl, dt, dd, ol, ul, li,
+
+fieldset, form, label, legend,
+
+table, caption, tbody, tfoot, thead, tr, th, td,
+
+article, aside, canvas, details, figcaption, figure,
+
+footer, header, hgroup, menu, nav, section, summary,
+
+time, mark, audio, video {
+
+    margin:0;
+
+    padding:0;
+
+    border:0;
+
+    outline:0;
+
+    /* font-size:100%; */
+
+    vertical-align:baseline;
+
+    background:transparent;
+
+    box-sizing:border-box;
+
+}
+
+body {
+    line-height:1;
+
+}
+
+:focus {
+
+    outline: 1;
+
+}
+
+article,aside,canvas,details,figcaption,figure,
+
+footer,header,hgroup,menu,nav,section,summary {
+
+    display:block;
+
+}
+
+ul {
+
+    list-style:none;
+
+}
+
+blockquote, q {
+
+    quotes:none;
+
+}
+
+blockquote:before, blockquote:after,
+
+q:before, q:after {
+
+    content:'';
+
+    content:none;
+
+}
+
+a {
+
+    margin:0;
+
+    padding:0;
+
+    border:0;
+
+    font-size:100%;
+
+    vertical-align:baseline;
+
+    background:transparent;
+    
+
+}
+
+ins {
+
+    background-color:#ff9;
+
+    color:#000;
+
+    text-decoration:none;
+
+}
+
+mark {
+
+    background-color:#ff9;
+
+    color:#000;
+
+    font-style:italic;
+
+    font-weight:bold;
+
+}
+
+del {
+
+    text-decoration: line-through;
+
+}
+
+abbr[title], dfn[title] {
+
+    border-bottom:1px dotted #000;
+
+    cursor:help;
+
+}
+
+table {
+
+    border-collapse:collapse;
+
+    border-spacing:0;
+
+}
+
+hr {
+
+    display:block;
+
+    height:1px;
+
+    border:0; 
+
+    border-top:1px solid #cccccc;
+
+    margin:1em 0;
+
+    padding:0;
+
+}
+
+input, select {
+
+    vertical-align:middle;
+
+}
+
+/*清除滚动条样式*/
+
+body::-webkit-scrollbar { width: 0 !important }
+::-webkit-scrollbar-corner {
+    background-color: var(--infocard-bg-color);
+  }
+
+
+
+/* .element { -ms-overflow-style: none; } */
+
+/* .element { overflow: -moz-scrollbars-none; } */
+
+/*清除el分页器样式*/
+
+.el-pagination span{
+    background: #574225;
+    border: 1px solid #FFBB46;
+    color: #FFFFFF;
+    padding: 0 5px;
+    line-height: 2;
+    border-radius: 4px;
+}
+.el-pagination.is-background .el-pager li:not(.disabled){
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+}
+.el-pagination.is-background .el-pager li:not(.disabled):hover{
+    color: #FFBB46;
+}
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #FFBB46;
+    color: #fff;
+}
+.el-pagination.is-background .btn-next {
+    /*对下一页的按钮样式进行修改*/
+    background-color: rgba(0, 0, 0, 0);
+    color: #FFF;
+}
+.el-pagination.is-background .btn-next:hover,.el-pagination.is-background .btn-prev:hover {
+    /*对按钮的hover样式进行修改*/
+    color: #FFBB46;
+}
+.el-pagination.is-background .btn-prev {
+    /*对上一页的按钮样式进行修改*/
+    background-color: rgba(0, 0, 0, 0);
+    color: #FFF;
+}
+/* 修改elment中的messagebox的样式 */
+.messagebox {
+    background-color: var(--infocard-bg-color) !important;
+    border: none !important;
+    box-shadow: .1px .1px 2px #ccc !important;
+  }
+
+.messagebox .el-message-box__header .el-message-box__title {
+    color: var(--font-color) !important;
+}
+
+.messagebox .el-message-box__content .el-input .el-input__inner {
+    background-color: var(--infocard-underground-color) !important;
+    border: 1px solid #666;
+    color: var(--font-color);
+}
+
+* {
+    transition: .3s;
+}
