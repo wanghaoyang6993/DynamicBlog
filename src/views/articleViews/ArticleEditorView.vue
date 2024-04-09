@@ -22,7 +22,7 @@
             <el-input v-model="article.summary" autocomplete="off" type="textarea"></el-input>
             </el-form-item>
             <el-form-item label="文章分类" :label-width="formLabelWidth">
-            <el-select v-model="article.categoryId"  placeholder="请选择文章分类">
+            <el-select v-model="article.categoryId"  placeholder="请选择文章分类" aria-required="true">
                 <el-option 
                     :label="item.name" 
                     :value="item.value" 
@@ -96,6 +96,16 @@ export default {
   },
   methods: {
     saveOrUpdateArticle(article) {
+
+        //分类不能为空
+        if(this.article.categoryId===null) {
+            Message({
+                message: "分类不能为空哦！",
+                type:'info',
+            })
+            return
+        }
+
         this.dialogFormVisible = false
         // 调用方法将 markdown 转换成 html 并使用 xss 过滤
         // const html = xss.process(VueMarkdownEditor.themeConfig.markdownParser.render(this.article.content));

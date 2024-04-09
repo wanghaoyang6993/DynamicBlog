@@ -3,7 +3,7 @@
   <div class="bloggerInfo">
     <div class="avatarContainer">
       <div class="myAvatar">
-        <img src="http://blog.theluckyone.top/ca433d78-1644-4c5c-9aab-9f111978a5cb.png" alt="" srcset="">
+        <img src="http://blog.theluckyone.top/5c802b73-6a53-4594-b621-afc4ac1f1687.jpg" alt="" srcset="">
       </div>
     </div>
     <div class="info">
@@ -11,7 +11,7 @@
         <span>何小幸</span>
       </div>
       <div class="bloggerDetail">
-        <span>欢迎光临！找我请联系q2320554377</span>
+        <span>欢迎光临，随意一些，不用换鞋啦~</span>
       </div>
     </div>
     <div class="iconContainer">

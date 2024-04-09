@@ -134,7 +134,7 @@ export default {
             this.isReply = false
             //判断当前用户是否已登录，若未登录按游客处理
             getCurrentUser().then(res => {
-                if(res.success) {
+                if(res.code===200) {
                     this.commentParam.authorId = res.data.id
                 }
             })
@@ -145,7 +145,7 @@ export default {
             getComments(`comment/${this.articleId}`).then(res => {
                 this.commentsArr = []
                 //id、nickname、avatar、content、children
-                res.data.forEach(comment => {
+                res.data?.forEach(comment => {
                     const {id, authorVo, children, content, createDate} = comment
                     this.commentsArr.push({id, authorVo, children, content, createDate})
                 });

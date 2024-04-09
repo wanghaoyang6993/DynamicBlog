@@ -39,7 +39,7 @@ const routes = [
       },
       {
         path:'/aboutMe',
-        component: () => import('@/views/homeViews/UnfinishedView'),
+        component: () => import('@/views/homeViews/AboutMe.vue'),
       }
     ]
   },

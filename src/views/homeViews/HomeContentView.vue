@@ -118,7 +118,7 @@ export default {
   left: 30.5%;
 }
 
-.homeContent >>> .unfinishedCard {
+.homeContent >>> .aboutMe {
   position: absolute;
   width: 40%;
   height: 67%;

@@ -72,15 +72,24 @@ export default {
             this.getArticle()
         },
         getArticle() {
-
             getArticleInfoById(this.id).then(res => {
+                if (res.code!==200) {
+                    this.$message.error(res.msg)
+                }
                 this.article = res.data
+                
                 window.localStorage.setItem("lastArticleId",this.id)
                 window.localStorage.setItem("lastArticleTitle",this.article.title)
                 window.localStorage.setItem("lastArticleSummary",this.article.summary)
             })
 
             getArticleSegmentById(this.id, 1).then(res => {
+                
+                if(res.code!==200) {
+                    this.getArticle()
+                    return
+                }
+                
                 const {content, total} = res.data
 
                 this.htmlContent = content
@@ -104,10 +113,11 @@ export default {
                                 this.htmlContent += res.data.content
                             })
                         },
+                        (res) => res.code===200,
                         //完成回调
                         () => this.done = true,
                         //最大重试次数
-                        100
+                        50
                     )
                 }catch(e) {
                     this.$message("网络出现问题啦，更换网络后刷新试试呢！")

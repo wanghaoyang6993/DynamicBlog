@@ -2,7 +2,6 @@
  * 请求拦截、相应拦截、错误统一处理
  */
 import axios from 'axios';
-// import QS from 'qs';
 import store from '@/store/index'
 import router from 'vue-router'
 import { Message } from 'element-ui';

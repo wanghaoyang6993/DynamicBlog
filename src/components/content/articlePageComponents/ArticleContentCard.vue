@@ -98,15 +98,15 @@ export default {
   watch: {
     article: {
       handler() {
-        this.loadingInstance.close()
+        // this.loadingInstance?.close()
         this.articleData = this.article;
         // this.content = newVal.body;
       },
       immediate: true
     },
-    content: {
+    htmlContent: {
       handler() {
-        this.loadingInstance.close()
+        this.loadingInstance?.close()
       },
       immediate:true
     }
