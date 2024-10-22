@@ -7,8 +7,9 @@ import router from 'vue-router'
 import { Message } from 'element-ui';
 
 // 环境的切换
-axios.defaults.baseURL = 'http://47.115.223.189:8888/api/';
+axios.defaults.baseURL = 'http://106.15.189.1:8889/api/';
 // 47.115.223.189
+// 106.15.189.1
 // 请求超时时间
 axios.defaults.timeout = 60000; 
 

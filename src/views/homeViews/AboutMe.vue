@@ -1,18 +1,20 @@
 <template>
   <div class="aboutMe">
-    <img id="avater" src="http://blog.theluckyone.top/55925afc-7142-4ed8-a5ea-f6979bfc49dc.jpg" alt="">
+    <img id="avater" :src="cover" alt="">
     <div class="container">
-      <p>Hello! 我是小何</p><br>
-      <p>家在山西，今年大四，现在在武汉实习</p><br>
-      <p>平时更新比较慢</p><br>
-      <p>找我请联系：Q2320554377</p>
+      {{ description }}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-
+  data() {
+    return {
+      cover: this.$store.getters.aboutMe.cover,
+      description: this.$store.getters.aboutMe.description
+    }
+  }
 }
 </script>
 
@@ -38,6 +40,7 @@ export default {
   right: 5vw;
   width: 20vw;
   color: var(--font-color);
+  line-height: 25px;
 }
  
 </style>

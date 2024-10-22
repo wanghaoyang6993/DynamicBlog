@@ -68,7 +68,7 @@ export default {
     },
     formatDate(date) {
       let d = new Date(date);
-      let month = d.getMonth() < 10 ? '0' + d.getMonth() : d.getMonth()
+      let month = Number(d.getMonth()) + 1 < 10 ? '0' + (Number(d.getMonth()) + 1) : Number(d.getMonth()) + 1
       let day = d.getDate() < 10 ? '0' + d.getDate() : d.getDate()
       let hours = d.getHours() < 10 ? '0' + d.getHours() : d.getHours()
       let minutes = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes()

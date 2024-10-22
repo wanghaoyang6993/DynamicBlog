@@ -1,8 +1,8 @@
 <template>
   <div class="elForm">
       <el-dialog 
-        title="发布动态" 
-        :visible.sync="dialogFormVisible" 
+        title="关于我" 
+        :visible.sync="changeAboutMeShow" 
         class="dialog"
         :modal-append-to-body="false">
 
@@ -19,20 +19,8 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
-          <el-form-item label="标题" :label-width="formLabelWidth">
-            <el-input type="input" v-model="form.title"></el-input>
-          </el-form-item>
-          <el-form-item label="内容" :label-width="formLabelWidth">
-            <el-input type="textarea" v-model="form.content"></el-input>
-          </el-form-item>
-          <el-form-item label="标签" :label-width="formLabelWidth">
-            <el-radio 
-                v-model="form.tagId" 
-                v-for="item in tags" 
-                :label="item.id" 
-                :key="item.id" 
-                border 
-                size="medium">{{ item.tag }}</el-radio>
+          <el-form-item label="描述" :label-width="formLabelWidth">
+            <el-input type="textarea" v-model="form.description"></el-input>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -45,40 +33,36 @@
 
 <script>
 import axios from 'axios'
-import {getInterestTags, upLoadPost} from '@/request/api'
 import { Message } from 'element-ui'
 
 export default {
     data() {
         return {
-            dialogFormVisible: false,
+            changeAboutMeShow: false,
             form: {
-                title:null,
-                content: '',
-                tagId:'1',
+                description: '',
                 cover: "",
-                createDate:null
             },
             formLabelWidth: '120px',
-            tags:null
+            tags:null,
         }
     },
     props: {
         isShow: {
             type:Boolean,
             default:false
-        }
+        },
     },
     watch: {
         isShow: {
             handler() {
-                this.dialogFormVisible = this.isShow
+               this.changeAboutMeShow = this.isShow
             },
             immediate: true
         },
         dialogFormVisible: {
             handler() {
-                if(this.dialogFormVisible !== this.isShow) {
+                if(this.changeAboutMeShow !== this.isShow) {
                     this.$emit('changeVisible')
                 }
             }
@@ -86,17 +70,11 @@ export default {
     },
     methods: {
         submit() {
-            this.form.createDate = Date.now();
-            upLoadPost(this.form).then(res => {
-                if(res.success) {
-                    Message({
-                        message:'上传成功！',
-                        type:'success'
-                    })
-                }
-            })
+            this.$store.commit('saveAboutMe', this.form)
+            this.$store.state.aboutMe.cover = this.form.cover
+            this.$store.state.aboutMe.description = this.form.description
+            Message.success('修改成功！')
             this.$emit('changeVisible');
-            location.reload()
         },
         handleAvatarSuccess(res, file) {
             // console.log("success")
@@ -127,11 +105,6 @@ export default {
             })
         }
     },
-    mounted() {
-        getInterestTags().then(res => {
-            this.tags = res.data
-        })
-    }
 }
 </script>
 

@@ -16,7 +16,7 @@
     </div>
     <div class="iconContainer">
       <div class="iconfont icon-login" v-if="!isLogin" @click="login"></div>
-      <el-dropdown @command="handleCommand" v-if="isLogin">
+      <el-dropdown @command="handleArticleCommand" v-if="isLogin">
         <span class="el-dropdown-link iconfont icon-edit">
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -24,21 +24,39 @@
           <el-dropdown-item command="b">写动态</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <div class="iconfont icon-settings_light" v-if="isLogin"></div>
+      <el-dropdown @command="handleSettingCommand" v-if="isLogin">
+        <span class="el-dropdown-link iconfont icon-settings_light">
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="a">新建相册</el-dropdown-item>
+          <el-dropdown-item command="b">上传照片</el-dropdown-item>
+          <el-dropdown-item command="c">修改关于我</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <div class="iconfont icon-login" v-if="isLogin" @click="logout"></div>
     </div>
     <PostDialog :isShow="dialogFormVisible" @changeVisible="cancelDialog"/>
+    <addAlbumDialog :isShow="addAlbumShow" @changeVisible="cancelAlbumDialog"/>
+    <addPhotoDialog :isShow="addPhotoShow" @changeVisible="cancelPhotoDialog"/>
+    <changeAboutMeDialog :isShow="changeAboutMeShow" @changeVisible="cancelAboutMeDialog"/>
   </div>
   
 </template>
 
 <script>
 import PostDialog from '../PostPageComponents/PostDialog.vue';
+import addAlbumDialog from '../albumPageComponents/addAlbumDialog.vue';
+import addPhotoDialog from '../albumPageComponents/addPhotoDialog.vue';
+import changeAboutMeDialog from '@/components/common/changeAboutMeDialog.vue';
 
 export default {
   data() {
     return {
-      dialogFormVisible:false
+      dialogFormVisible:false,
+      addAlbumShow: false,
+      addPhotoShow: false,
+      addArticleCategoryShow: false,
+      changeAboutMeShow: false
     }
   },
   computed: {
@@ -53,19 +71,40 @@ export default {
     logout() {
       this.$store.dispatch('logout')
     },
-    handleCommand(command) {
+    handleArticleCommand(command) {
       if(command === 'a') {
         this.$router.push('/editor')
       }else {
         this.dialogFormVisible = true
       }
     },
+    handleSettingCommand(command) {
+      if(command === 'a') {
+        this.addAlbumShow = true
+      }else if(command === 'b') {
+        this.addPhotoShow = true
+      }else {
+        this.changeAboutMeShow = true
+      }
+    },
     cancelDialog() {
       this.dialogFormVisible = false;
+    },
+    cancelPhotoDialog() {
+      this.addPhotoShow = false
+    },
+    cancelAlbumDialog() {
+      this.addAlbumShow = false
+    },
+    cancelAboutMeDialog() {
+      this.changeAboutMeShow = false
     }
   },
   components: {
-    PostDialog
+    PostDialog,
+    addAlbumDialog,
+    addPhotoDialog,
+    changeAboutMeDialog
   }
 }
 </script>

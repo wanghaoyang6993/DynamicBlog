@@ -76,7 +76,7 @@ export default {
       let token = window.localStorage.getItem("token")
         axios({
           method:'post',
-          url:'http://47.115.223.189:8888/api/upload',
+          url:'http://106.15.189.1:8889/api/upload',
           headers:{
             Authorization:token,
             'Content-Type':'multipart/form-data'

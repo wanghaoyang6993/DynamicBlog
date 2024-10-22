@@ -12,11 +12,18 @@ export default new Vuex.Store({
     theme: "light",
     currentUserInfo: null,
     currentCategoryId: 0,
-    isLogin:false
+    isLogin:false,
+    aboutMe: {
+      cover: `http://blog.theluckyone.top/00ba8a89-012a-4b17-9a89-17fa934390a7.jpg`,
+      description: `自在的少年~`
+    }
   },
   getters: {
     isLogin(state) {
       return state.isLogin
+    },
+    aboutMe(state) {
+      return state.aboutMe
     }
   },
   mutations: {
@@ -31,6 +38,10 @@ export default new Vuex.Store({
     },
     saveIsLogin(state, info) {
       state.isLogin = info
+    },
+    saveAboutMe(state, aboutMe) {
+      state.aboutMe.cover = aboutMe.cover;
+      state.aboutMe.description = aboutMe.description;
     }
   },
   actions: {

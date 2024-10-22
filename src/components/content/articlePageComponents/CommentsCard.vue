@@ -162,7 +162,6 @@ export default {
             handler() {
                 this.askForComments()
             },
-            immediate:true
         }
     },
 }

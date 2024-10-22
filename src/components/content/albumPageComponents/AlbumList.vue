@@ -74,7 +74,8 @@ export default {
           cancelButtonText: '取消',
           inputType: 'text',
           customClass:"messagebox"
-        }).then(({ value }) => {
+        }).then(({value}) => {
+          console.log(value);
           verifyAlbumPassword({id, password:value}).then(res => {
             if(res.data==="allowed") {
               //鉴权成功后放入sessionStorage，本次会话中再次访问不再需要输入密码

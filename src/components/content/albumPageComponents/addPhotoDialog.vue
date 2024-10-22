@@ -1,8 +1,8 @@
 <template>
   <div class="elForm">
       <el-dialog 
-        title="发布动态" 
-        :visible.sync="dialogFormVisible" 
+        title="上传照片" 
+        :visible.sync="addPhotoShow" 
         class="dialog"
         :modal-append-to-body="false">
 
@@ -19,21 +19,35 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
-          <el-form-item label="标题" :label-width="formLabelWidth">
-            <el-input type="input" v-model="form.title"></el-input>
-          </el-form-item>
-          <el-form-item label="内容" :label-width="formLabelWidth">
-            <el-input type="textarea" v-model="form.content"></el-input>
-          </el-form-item>
-          <el-form-item label="标签" :label-width="formLabelWidth">
+          <el-form-item label="是否私密" :label-width="formLabelWidth">
             <el-radio 
-                v-model="form.tagId" 
-                v-for="item in tags" 
-                :label="item.id" 
-                :key="item.id" 
-                border 
-                size="medium">{{ item.tag }}</el-radio>
+                v-model="form.isprivate" 
+                label="true" 
+                border
+                size="medium">
+                是
+            </el-radio>
+            <el-radio 
+                v-model="form.isprivate" 
+                label="false" 
+                border
+                size="medium">
+                否
+            </el-radio>
           </el-form-item>
+          <el-form-item label="描述" :label-width="formLabelWidth">
+            <el-input type="textarea" v-model="form.description"></el-input>
+          </el-form-item>
+          <el-form-item label="选择相册" :label-width="formLabelWidth">
+            <el-radio 
+                v-model="form.albumId" 
+                v-for="album in albums" 
+                :label="album.id" 
+                :key="album.id" 
+                border 
+                size="medium">{{ album.name }}</el-radio>
+          </el-form-item>
+
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="$emit('changeVisible')">取 消</el-button>
@@ -45,40 +59,39 @@
 
 <script>
 import axios from 'axios'
-import {getInterestTags, upLoadPost} from '@/request/api'
+import {addPhoto, getAllAlbum} from '@/request/api'
 import { Message } from 'element-ui'
 
 export default {
     data() {
         return {
-            dialogFormVisible: false,
+            addPhotoShow: false,
             form: {
-                title:null,
-                content: '',
-                tagId:'1',
-                cover: "",
-                createDate:null
+                description: '',
+                albumId:'',
+                url: "",
+                isprivate: false
             },
             formLabelWidth: '120px',
-            tags:null
+            albums:[],
         }
     },
     props: {
         isShow: {
             type:Boolean,
             default:false
-        }
+        },
     },
     watch: {
         isShow: {
             handler() {
-                this.dialogFormVisible = this.isShow
+                this.addPhotoShow = this.isShow
             },
             immediate: true
         },
         dialogFormVisible: {
             handler() {
-                if(this.dialogFormVisible !== this.isShow) {
+                if(this.addPhotoShow !== this.isShow) {
                     this.$emit('changeVisible')
                 }
             }
@@ -86,8 +99,9 @@ export default {
     },
     methods: {
         submit() {
-            this.form.createDate = Date.now();
-            upLoadPost(this.form).then(res => {
+            // this.form.createDate = Date.now();
+            addPhoto(this.form).then(res => {
+                alert()
                 if(res.success) {
                     Message({
                         message:'上传成功！',
@@ -96,11 +110,11 @@ export default {
                 }
             })
             this.$emit('changeVisible');
-            location.reload()
+            // location.reload()
         },
         handleAvatarSuccess(res, file) {
             // console.log("success")
-            this.form.cover = URL.createObjectURL(file.raw);
+            this.form.url = URL.createObjectURL(file.raw);
         },
         beforeAvatarUpload() {
         },
@@ -122,15 +136,14 @@ export default {
                 },
                 data:formdata
             }).then(res => {
-                // console.log(res.data.data)
-                this.form.cover = res.data.data
+                this.form.url = res.data.data
             })
-        }
+        },
     },
     mounted() {
-        getInterestTags().then(res => {
-            this.tags = res.data
-        })
+        getAllAlbum().then(res => {
+            this.albums = res.data
+        });
     }
 }
 </script>

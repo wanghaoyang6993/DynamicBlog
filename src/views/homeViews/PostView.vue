@@ -98,6 +98,7 @@ export default {
     top: 0;
     width: 100%;
     height: 44%;
+    z-index: 1;
 }
 
 .infoCardTwo {
@@ -105,6 +106,7 @@ export default {
     top: 46.8%;
     width: 100%;
     height: 44%;
+    z-index: 1;
 }
 
 .infoCardTwo:focus {

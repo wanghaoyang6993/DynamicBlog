@@ -77,3 +77,7 @@ export const getPaginationPhotoByAlbumId = (id, p) => post("photo/" + id, p)
 export const getAllPhotoByAlbumId = (id) => get("photo/all/" + id)
 
 export const verifyAlbumPassword = (param) => post('album/verify', param)
+
+export const addAlbum = p => post("/album", p);
+
+export const addPhoto = p => post("/photo", p);

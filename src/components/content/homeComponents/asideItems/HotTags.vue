@@ -56,7 +56,7 @@ export default {
 .tag {
     display: inline-block;
     padding: 5px;
-    font-size: .8vw;
+    font-size: .7vw;
     border-radius: 10%;
     user-select: none;
 }

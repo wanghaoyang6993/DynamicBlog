@@ -1,8 +1,8 @@
 <template>
   <div class="elForm">
       <el-dialog 
-        title="发布动态" 
-        :visible.sync="dialogFormVisible" 
+        title="新建相册" 
+        :visible.sync="addAlbumShow" 
         class="dialog"
         :modal-append-to-body="false">
 
@@ -19,20 +19,17 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
-          <el-form-item label="标题" :label-width="formLabelWidth">
-            <el-input type="input" v-model="form.title"></el-input>
+          <el-form-item label="名称" :label-width="formLabelWidth">
+            <el-input type="input" v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="内容" :label-width="formLabelWidth">
-            <el-input type="textarea" v-model="form.content"></el-input>
+          <el-form-item label="描述" :label-width="formLabelWidth">
+            <el-input type="textarea" v-model="form.description"></el-input>
           </el-form-item>
-          <el-form-item label="标签" :label-width="formLabelWidth">
-            <el-radio 
-                v-model="form.tagId" 
-                v-for="item in tags" 
-                :label="item.id" 
-                :key="item.id" 
-                border 
-                size="medium">{{ item.tag }}</el-radio>
+          <el-form-item label="权重" :label-width="formLabelWidth">
+            <el-input type="number" v-model="form.weight"></el-input>
+          </el-form-item>
+          <el-form-item label="密码（不设置则为公开相册）" :label-width="formLabelWidth">
+            <el-input type="number" v-model="form.password"></el-input>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -45,40 +42,40 @@
 
 <script>
 import axios from 'axios'
-import {getInterestTags, upLoadPost} from '@/request/api'
+import {addAlbum} from '@/request/api'
 import { Message } from 'element-ui'
 
 export default {
     data() {
         return {
-            dialogFormVisible: false,
+            addAlbumShow: false,
             form: {
-                title:null,
-                content: '',
-                tagId:'1',
+                name:"",
+                description: '',
+                weight:'1',
                 cover: "",
-                createDate:null
+                password:''
             },
             formLabelWidth: '120px',
-            tags:null
+            tags:null,
         }
     },
     props: {
         isShow: {
             type:Boolean,
             default:false
-        }
+        },
     },
     watch: {
         isShow: {
             handler() {
-                this.dialogFormVisible = this.isShow
+                this.addAlbumShow = this.isShow
             },
             immediate: true
         },
         dialogFormVisible: {
             handler() {
-                if(this.dialogFormVisible !== this.isShow) {
+                if(this.addAlbumShow !== this.isShow) {
                     this.$emit('changeVisible')
                 }
             }
@@ -87,7 +84,7 @@ export default {
     methods: {
         submit() {
             this.form.createDate = Date.now();
-            upLoadPost(this.form).then(res => {
+            addAlbum(this.form).then(res => {
                 if(res.success) {
                     Message({
                         message:'上传成功！',
@@ -127,11 +124,6 @@ export default {
             })
         }
     },
-    mounted() {
-        getInterestTags().then(res => {
-            this.tags = res.data
-        })
-    }
 }
 </script>
 
